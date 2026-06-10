@@ -1,0 +1,16 @@
+InputFile  = data/2_reconstruction/noSmr_wN.root
+OutputFile = data/3_analysis/analysis_data.root
+
+VertexZEdges = 15.0
+
+VertexZSigma = 5.0
+
+ErrZLimit = 0.05
+
+MultiplicityMin = 1
+MultiplicityMax = 50
+
+MultMinZoom = 5
+MultMaxZoom = 20
+
+MinEntriesPerBin = 1000

@@ -1,0 +1,25 @@
+# ==========================================================
+# FILE DI CONFIGURAZIONE: RICOSTRUZIONE
+# ==========================================================
+
+# --- File di Input / Output ---
+InputFile    = data/1_simulation/vGaus_MSon_mln.root
+OutputFile   = data/2_reconstruction/noSmr_wN.root
+GeometryFile = input/geometry_prova.txt
+
+# --- Parametri Base Algoritmo (Tracklet Building) ---
+Seed         = 42
+Algorithm    = SlidingWindow   # Opzioni: HalfSample, SlidingWindow
+DeltaPhiMax  = 0.0035
+ZWindowSize  = 0.2
+
+# --- Parametri di Prova in Ricostruzione (Stress Test) ---
+
+# 1. Test di Risoluzione (Sostituisce lo smearing originale)
+ReSmear   = false
+NewResZ   = 0.0050     
+NewResPhi = 0.0080     # Nuova incertezza in arco R-Phi
+
+# 2. Test di Background
+AddNoise  = true
+NoiseMean = 2.5        # N. medio (Poissoniano) di hit casuali per layer
