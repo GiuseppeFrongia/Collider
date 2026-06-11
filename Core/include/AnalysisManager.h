@@ -15,6 +15,8 @@ class AnalysisManager {
 public:
     AnalysisManager();
     virtual ~AnalysisManager();
+    AnalysisManager(const AnalysisManager&) = delete;
+    AnalysisManager& operator=(const AnalysisManager&) = delete;
 
     bool Init(const std::string& inputFile);
     void Run();
