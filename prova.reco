@@ -7,13 +7,13 @@ InputFile    = data/1_simulation/vGaus_MSon_mln.root
 OutputFile   = data/2_reconstruction/noSmr_wN.root
 GeometryFile = input/geometry_prova.txt
 
-# --- Parametri Base Algoritmo (Tracklet Building) ---
+# --- Parametri Base Algoritmo ---
 Seed         = 42
 Algorithm    = SlidingWindow   # Opzioni: HalfSample, SlidingWindow
 DeltaPhiMax  = 0.0035
 ZWindowSize  = 0.2
 
-# --- Parametri di Prova in Ricostruzione (Stress Test) ---
+# --- Parametri di Prova in Ricostruzione ---
 
 # 1. Test di Risoluzione (Sostituisce lo smearing originale)
 ReSmear   = false
