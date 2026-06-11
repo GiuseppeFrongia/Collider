@@ -38,7 +38,8 @@ bool AnalysisManager::Init(const std::string& inputFile) {
     fMultMinZoom      = parser.GetParameter<int>("MultMinZoom", 5);
     fMultMaxZoom      = parser.GetParameter<int>("MultMaxZoom", 20);
     fMinEntriesPerBin = parser.GetParameter<int>("MinEntriesPerBin", 1000);
-
+    fPlotFlag         = parser.GetParameter<bool>("PlotFlag", true);
+    
     fInFile = TFile::Open(fInFileName.c_str(), "READ");
     if(!fInFile || fInFile->IsZombie()) {
         std::cerr << "[ERROR] AnalysisManager: Impossibile aprire " << fInFileName << std::endl;
@@ -209,24 +210,26 @@ void AnalysisManager::Run() {
     TH1D* ErrMultHistoFull   = ErrMultHisto2D->ProjectionY("ErrMultHistoFull");
     TH1D* ErrMultHistoSelect = ErrMultHisto2D->ProjectionY("ErrMultHistoSelect", bMin, bMax);
 
-    PlotResiduals1D(ErrMultHistoFull, "Residui Globali Spacchettati", "residuals_full", true);
-    PlotResiduals1D(ErrMultHistoSelect, "Residui Selezionati", "residuals_selected", true);
+    if(fPlotFlag){
+        PlotResiduals1D(ErrMultHistoFull, "Residui Globali Spacchettati", "residuals_full", true);
+        PlotResiduals1D(ErrMultHistoSelect, "Residui Selezionati", "residuals_selected", true);
 
-    PlotResiduals2D(ErrMultHisto2D, "Residui vs Molteplicita'", "residuals2D_vs_mult");
-    PlotResiduals2D(ErrMultHisto2D_1s, "Residui vs Molteplicita' (|Z_{true}| < #sigma)", "residuals2D_vs_mult_1sigma");
-    PlotResiduals2D(ErrMultHisto2D_3s, "Residui vs Molteplicita' (|Z_{true}| < 3#sigma)", "residuals2D_vs_mult_3sigma");
-    PlotResiduals2D(ErrZHisto2D, "Residui vs Coordinate Z_{true}", "residuals2D_vs_Zvert");
+        PlotResiduals2D(ErrMultHisto2D, "Residui vs Molteplicita'", "residuals2D_vs_mult");
+        PlotResiduals2D(ErrMultHisto2D_1s, "Residui vs Molteplicita' (|Z_{true}| < #sigma)", "residuals2D_vs_mult_1sigma");
+        PlotResiduals2D(ErrMultHisto2D_3s, "Residui vs Molteplicita' (|Z_{true}| < 3#sigma)", "residuals2D_vs_mult_3sigma");
+        PlotResiduals2D(ErrZHisto2D, "Residui vs Coordinate Z_{true}", "residuals2D_vs_Zvert");
 
-    PlotResolutionGraph(grResMult, "Risoluzione vs Molteplicita' Globale", "resolution_vs_mult");
-    PlotResolutionGraph(grResMult_1s, "Risoluzione vs Molteplicita' (|Z_{true}| < #sigma)", "resolution_vs_mult_1sigma");
-    PlotResolutionGraph(grResMult_3s, "Risoluzione vs Molteplicita' (|Z_{true}| < 3#sigma)", "resolution_vs_mult_3sigma");
-    PlotResolutionGraph(grResZ, "Risoluzione in funzione di Z_{true}", "resolution_vs_Zvert");
+        PlotResolutionGraph(grResMult, "Risoluzione vs Molteplicita' Globale", "resolution_vs_mult");
+        PlotResolutionGraph(grResMult_1s, "Risoluzione vs Molteplicita' (|Z_{true}| < #sigma)", "resolution_vs_mult_1sigma");
+        PlotResolutionGraph(grResMult_3s, "Risoluzione vs Molteplicita' (|Z_{true}| < 3#sigma)", "resolution_vs_mult_3sigma");
+        PlotResolutionGraph(grResZ, "Risoluzione in funzione di Z_{true}", "resolution_vs_Zvert");
 
-    PlotEfficiency1D(effMult, "Efficienza vs Molteplicita' Globale", "efficiency_vs_mult");
-    PlotEfficiency1D(effMult_1s, "Efficienza vs Molteplicita' (|Z_{true}| < #sigma)", "efficiency_vs_mult_1sigma");
-    PlotEfficiency1D(effMult_3s, "Efficienza vs Molteplicita' (|Z_{true}| < 3#sigma)", "efficiency_vs_mult_3sigma");
-    PlotEfficiency1D(effZ, "Efficienza in funzione della coordinata Z_{true}", "efficiency_vs_Zvert");
-
+        PlotEfficiency1D(effMult, "Efficienza vs Molteplicita' Globale", "efficiency_vs_mult");
+        PlotEfficiency1D(effMult_1s, "Efficienza vs Molteplicita' (|Z_{true}| < #sigma)", "efficiency_vs_mult_1sigma");
+        PlotEfficiency1D(effMult_3s, "Efficienza vs Molteplicita' (|Z_{true}| < 3#sigma)", "efficiency_vs_mult_3sigma");
+        PlotEfficiency1D(effZ, "Efficienza in funzione della coordinata Z_{true}", "efficiency_vs_Zvert");
+    }
+    
     fOutFile->cd();
     ErrMultHisto2D->Write(); ErrZHisto2D->Write();
     grResMult->Write(); grResMult_1s->Write(); grResMult_3s->Write(); grResZ->Write();
