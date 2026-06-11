@@ -60,6 +60,9 @@ class Event : public TObject {
 public:
     Event();
     virtual ~Event();
+    Event(const Event&) = delete;
+    Event& operator=(const Event&) = delete;
+
     void Clear(Option_t* option = "") override;
     
     void AddVertex(double x, double y, double z, int mult) { fTrueVertices.push_back(Vertex{x, y, z, mult}); }
