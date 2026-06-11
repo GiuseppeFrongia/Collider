@@ -1,3 +1,7 @@
+# ==========================================================
+# FILE DI CONFIGURAZIONE: SIMULAZIONE
+# ==========================================================
+
 # Parametri di generazione
 Seed         = 42
 NEvents      = 1000000
