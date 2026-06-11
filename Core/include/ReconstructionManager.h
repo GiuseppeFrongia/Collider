@@ -18,6 +18,8 @@ public:
 
     ReconstructionManager();
     virtual ~ReconstructionManager();
+    ReconstructionManager(const ReconstructionManager&) = delete;
+    ReconstructionManager& operator=(const ReconstructionManager&) = delete;
 
     bool Init(const std::string& configFile);
     void Run();
