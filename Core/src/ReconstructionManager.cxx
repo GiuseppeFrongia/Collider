@@ -126,6 +126,9 @@ void ReconstructionManager::Run() {
     
     auto rand = RandomManager::Instance(fSeed);
 
+    std::map<int, std::vector<RecoHit>> hitsByLayer;
+    std::vector<double> zCandidates;
+
     ProgressBar pBar(entries, "Reconstruction");
     pBar.Start();
 
@@ -136,7 +139,7 @@ void ReconstructionManager::Run() {
         fZTrue = fEvent->GetPrimaryVertex().z;
         fTrueMult = fEvent->GetPrimaryVertex().mult;
         
-        std::map<int, std::vector<RecoHit>> hitsByLayer;
+        hitsByLayer.clear();
         int totHits = fEvent->GetNHits();
         
         for(int j = 0; j < totHits; ++j){
@@ -190,7 +193,7 @@ void ReconstructionManager::Run() {
             });
         }
         
-        std::vector<double> zCandidates;
+        zCandidates.clear();
         
         for(auto it1 = hitsByLayer.begin(); it1 != hitsByLayer.end(); ++it1) {
             for(auto it2 = std::next(it1); it2 != hitsByLayer.end(); ++it2) {
