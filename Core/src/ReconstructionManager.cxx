@@ -35,7 +35,8 @@ fSuccess(false) {
 
 ReconstructionManager::~ReconstructionManager() { 
     if(fInFile)  { delete fInFile;  fInFile = nullptr; } 
-    if(fOutFile) { delete fOutFile; fOutFile = nullptr; } 
+    if(fOutFile) { delete fOutFile; fOutFile = nullptr; }
+    if(fEvent) { delete fEvent; }
 }
 
 bool ReconstructionManager::LoadGeometry(const std::string& geomFileName) {
