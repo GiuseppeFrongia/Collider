@@ -21,6 +21,7 @@ AnalysisManager::AnalysisManager() :
 AnalysisManager::~AnalysisManager() {
     if(fInFile) { fInFile->Close(); delete fInFile; }
     if(fOutFile) { fOutFile->Close(); delete fOutFile; }
+    if(fEvent) { delete fEvent; fEvent = nullptr; }
 }
 
 bool AnalysisManager::Init(const std::string& inputFile) {
@@ -42,13 +43,13 @@ bool AnalysisManager::Init(const std::string& inputFile) {
     
     fInFile = TFile::Open(fInFileName.c_str(), "READ");
     if(!fInFile || fInFile->IsZombie()) {
-        std::cerr << "[ERROR] AnalysisManager: Impossibile aprire " << fInFileName << std::endl;
+        std::cerr << "[ERROR] " << fInFileName << " not found!"" << std::endl;
         return false;
     }
 
     fInTree = (TTree*)fInFile->Get("RecoTree");
     if(!fInTree) {
-        std::cerr << "[ERROR] RecoTree non trovato!" << std::endl;
+        std::cerr << "[ERROR] RecoTree not found!" << std::endl;
         return false;
     }
 
@@ -88,9 +89,11 @@ void AnalysisManager::Run() {
 
     // --- EVENT LOOP ---
     int entries = fInTree->GetEntries();
-    std::cout << "[INFO] Analizzando " << entries << " eventi..." << std::endl;
+    ProgressBar pBar(entries, "Analysis");
+    pBar.Start();
 
     for (int i = 0; i < entries; ++i) {
+        pBar.Update(i);
         fInTree->GetEntry(i);
 
         hZTrueAllTmp->Fill(zTrue);
@@ -119,6 +122,7 @@ void AnalysisManager::Run() {
             }
         }
     }
+    pBar.Update(entries);
 
     // --- BINNING DINAMICO PER Z ---
     std::vector<double> binEdgesZ = FormBinEdges(hZTrueAllTmp, fMinEntriesPerBin);
@@ -235,9 +239,8 @@ void AnalysisManager::Run() {
     grResMult->Write(); grResMult_1s->Write(); grResMult_3s->Write(); grResZ->Write();
     effMult->Write(); effMult_1s->Write(); effMult_3s->Write(); effZ->Write();
 
-    delete hZTrueAllTmp;
-    delete ErrMultHistoFull; delete ErrMultHistoSelect;
-    std::cout << "[INFO] Analisi integrata completata con successo!" << std::endl;
+    delete hZTrueAllTmp; delete ErrMultHistoFull; delete ErrMultHistoSelect;
+    std::cout << "[INFO] Analysis completed successfully!" << std::endl;
 }
 
 double AnalysisManager::FitIterative(TH1D* h, double& error) {
