@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {                      //parametri CLI per auto
             ReconstructionManager reco; if (reco.Init(argv[2])) { reco.Run(); return 0; } return 1;
         }
         if (flag == "-a" && argc >= 3) {
-            AnalysisManager ana; if (ana.Init(argv[2])) { ana.Run(); } return 0;
+            AnalysisManager ana; if (ana.Init(argv[2])) { ana.Run(); return 0; } return 1;
         }
         std::cerr << "Flag unknown. Use -s (simulation), -r (reconstruction) or -a (analysis)." << std::endl; return 1;
     }
