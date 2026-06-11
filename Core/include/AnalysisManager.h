@@ -43,6 +43,7 @@ private:
     int fMultMinZoom;
     int fMultMaxZoom;
     int fMinEntriesPerBin;
+    bool fPlotFlag;
 };
 
 #endif // ANALYSISMANAGER_H
