@@ -1,16 +1,16 @@
-InputFile  = data/2_reconstruction/noSmr_wN.root
-OutputFile = data/3_analysis/analysis_data.root
+# ==========================================================
+# FILE DI CONFIGURAZIONE: ANALISI (AnalysisManager)
+# ==========================================================
 
-VertexZEdges = 15.0
+# --- File di Input / Output ---
+InputFile        = data/2_reconstruction/noSmr_wN.root
+OutputFile       = data/3_analysis/analysis_results_wN.root
 
-VertexZSigma = 5.0
+# --- Parametri Grafici e di Fit ---
+ErrZLimit        = 0.05
 
-ErrZLimit = 0.05
+MinEntriesPerBin = 2500
 
-MultiplicityMin = 1
-MultiplicityMax = 50
-
-MultMinZoom = 5
-MultMaxZoom = 20
-
-MinEntriesPerBin = 1000
+# --- Zoom sulla Molteplicità ---
+MultMinZoom      = 15
+MultMaxZoom      = 60
