@@ -214,7 +214,7 @@ void ReconstructionManager::Run() {
                         auto end_it = std::upper_bound(start_it, outerHits.end(), max_val, 
                             [](double val, const RecoHit& h) { return val < h.phi; });
                             
-                        // calcola Z0 solo per le hit che sono cadute in questo range perfetto!
+                        // calcola Z0 solo per le hit che sono cadute in questo range
                         for(auto it = start_it; it != end_it; ++it) {
                             double dZ = it->z - h1.z;
                             double dR = it->r - h1.r;
