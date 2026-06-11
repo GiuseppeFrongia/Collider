@@ -30,7 +30,7 @@ public:
 
     void SetDirection(double ux, double uy, double uz) {
         fUx = ux; fUy = uy; fUz = uz;
-        NormalizeDirection(); // Protezione automatica contro la perdita di unitarietà
+        NormalizeDirection();
     }
 
     void SetMomentum(double p) { fP = p; }
@@ -49,8 +49,8 @@ public:
     }
 
     double GetPt() const {
-        // Impulso trasverso
-        return fP * std::sqrt(fUx * fUx + fUz * fUx);
+        // impulso trasverso
+        return fP * std::sqrt(fUx * fUx + fUy * fUy);
     }
 
 private:
