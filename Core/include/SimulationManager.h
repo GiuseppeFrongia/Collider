@@ -20,6 +20,8 @@ class SimulationManager {
 public:
     SimulationManager();
     ~SimulationManager();
+    SimulationManager(const SimulationManager&) = delete;
+    SimulationManager& operator=(const SimulationManager&) = delete;
 
     bool Init(const std::string& configFile);
     void Run();
