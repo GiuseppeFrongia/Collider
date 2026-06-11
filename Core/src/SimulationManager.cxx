@@ -43,6 +43,8 @@ SimulationManager::~SimulationManager() {
     delete fEta;
     delete fMult;
     delete fTransport;
+
+    if(fOutFile) { delete fOutFile; fOutFile = nullptr; fTree = nullptr; }
 }
 
 void SimulationManager::ClearGeometry() {
