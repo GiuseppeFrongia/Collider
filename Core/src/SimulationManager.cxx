@@ -41,6 +41,7 @@ SimulationManager::~SimulationManager() {
     delete fVertex;
     delete fImpulseDistr;
     delete fEta;
+    delete fPhi;
     delete fMult;
     delete fTransport;
 
@@ -186,7 +187,5 @@ void SimulationManager::Run() {
     fOutFile->cd(); 
     fTree->Write("", TObject::kOverwrite); //fTree->Write();
     fOutFile->Close(); 
-    delete fOutFile; 
-    fOutFile = nullptr; 
-    fTree = nullptr;
+    delete fOutFile; fOutFile = nullptr; fTree = nullptr;
 }
