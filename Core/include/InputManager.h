@@ -50,7 +50,6 @@ inline bool InputManager::GetParameter<bool>(const std::string& key, bool defVal
     auto it = fParameters.find(key);
     
     if (it == fParameters.end()) {
-        // std::boolalpha forces the stream to print "true"/"false" instead of 1/0
         std::cerr << "[WARNING] Key '" << key 
                   << "' not found in input file. Using default: " 
                   << std::boolalpha << defVal << std::endl;
