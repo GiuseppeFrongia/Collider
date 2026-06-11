@@ -43,7 +43,7 @@ bool AnalysisManager::Init(const std::string& inputFile) {
     
     fInFile = TFile::Open(fInFileName.c_str(), "READ");
     if(!fInFile || fInFile->IsZombie()) {
-        std::cerr << "[ERROR] " << fInFileName << " not found!"" << std::endl;
+        std::cerr << "[ERROR] " << fInFileName << " not found!" << std::endl;
         return false;
     }
 
