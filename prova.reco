@@ -11,7 +11,7 @@ GeometryFile = input/geometry_prova.txt
 Seed         = 42
 Algorithm    = SlidingWindow   # Opzioni: HalfSample, SlidingWindow
 DeltaPhiMax  = 0.0035
-ZWindowSize  = 0.2
+ZWindowSize  = 0.5
 
 # --- Parametri di Prova in Ricostruzione ---
 
