@@ -1,0 +1,28 @@
+# ===================================================
+# --------------------- ANALISI ---------------------
+# ===================================================
+
+# File di input e output
+InputFile         = data/2_reconstruction/vGaus_SW_wN.root
+OutputFile        = data/3_analysis/Gaus_SW/analysis_data.root
+
+# Parametri per Z
+ZLimit            = 15.0        # Limite asse istogramma (cm)
+VertexZSigma      = 5.3         # Deviazione standard del fascio (cm)
+SlicesPerSigmaZ   = 20.0        # "Densità" per grafico 2D efficienza
+MinEntriesPerBin  = 10000       # "Densità" per i restanti
+
+# Parametri per Residui
+ResLimit          = 0.1        # Limite asse istogramma (cm)
+ExpectedResol     = 0.012      # Risoluzione teorica attesa per il rivelatore (cm)
+BinsPerSigma      = 4.0        # Punti di campionamento per il fit di Minuit
+fDoErrFit         = true       # Esegui il fit nel grafico dei residui
+
+# Parametri molteplicita
+MultiplicityMin   = 1
+MultiplicityMax   = 50
+MultMinZoom       = 5
+MultMaxZoom       = 20
+
+# Switch per salvare plot in .png e .pdf
+PlotFlag          = true

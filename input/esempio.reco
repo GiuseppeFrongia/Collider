@@ -1,0 +1,23 @@
+# =========================================================
+# --------------------- RICOSTRUZIONE ---------------------
+# =========================================================
+
+# File di input e output
+InputFile    = data/1_simulation/vGaus_MSon_mln.root
+OutputFile   = data/2_reconstruction/vGaus_SW_wN.root
+GeometryFile = input/geometry.txt
+
+# Parametri base algoritmo
+Seed         = 42
+Algorithm    = SlidingWindow   # Opzioni: HalfSample, SlidingWindow
+DeltaPhiMax  = 0.0035          # rad
+ZWindowSize  = 0.5             # cm
+
+# Parametri resmearing
+ReSmear   = false
+NewResZ   = 0.0050             # cm
+NewResPhi = 0.0080             # cm  (arco R-Phi)
+
+# PArametri noise poissoniano
+AddNoise  = true
+NoiseMean = 2.5                # N. medio di hit casuali per layer

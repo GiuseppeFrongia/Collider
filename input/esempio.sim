@@ -1,0 +1,24 @@
+# =======================================================
+# --------------------- SIMULAZIONE ---------------------
+# =======================================================
+
+# Parametri di generazione
+Seed         = 42
+NEvents      = 1000000
+PileUpMean   = 0.0
+
+# Distribuzioni cinematiche e spaziali
+VertexDistr  = Gaussian 0 0.01 Gaussian 0 0.01 Gaussian 0 5.3
+
+MomentumDistr = Fixed 1.0
+EtaDistr      = Hist input/kinem.root heta2
+MultDistr     = Hist input/kinem.root hm
+PhiDistr      = Uniform 0 2*pi
+
+# Transport, geometria e scattering
+Transport    = LinearTransport
+GeometryFile = input/geometry.txt
+EnableMS     = true
+
+# File di output
+OutputFile   = data/1_simulation/vGaus_MSon_mln.root
