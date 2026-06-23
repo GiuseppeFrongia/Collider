@@ -212,11 +212,11 @@ void ReconstructionManager::Run() {
                     // ricerca binaria
                     auto findAndAdd = [&](double minVal, double maxVal) {
                         
-                        // cerca la prima hit >= minVal (O(log N))
+                        // cerca la prima hit >= minVal (log_2)
                         auto start_it = std::lower_bound(outerHits.begin(), outerHits.end(), minVal, 
                             [](const RecoHit& h, double val) { return h.phi < val; });
                         
-                        // Cerca la prima hit > max_val
+                        // cerca la prima hit > max_val
                         auto end_it = std::upper_bound(start_it, outerHits.end(), maxVal, 
                             [](double val, const RecoHit& h) { return val < h.phi; });
                             
@@ -233,7 +233,7 @@ void ReconstructionManager::Run() {
                     // gestione geometrica del "Wrap-Around"
                     if (phiMin < -TMath::Pi()) {
                         findAndAdd(phiMin + TMath::TwoPi(), TMath::Pi()); 
-                        findAndAdd(-TMath::Pi(), phiMax);             
+                        findAndAdd(-TMath::Pi(), phiMax);
                     } else if (phiMax > TMath::Pi()) {
                         findAndAdd(phiMin, TMath::Pi());              
                         findAndAdd(-TMath::Pi(), phiMax - TMath::TwoPi());
@@ -303,6 +303,7 @@ double ReconstructionManager::HalfSampleMode(std::vector<double> zCands) {
                 bestIdx = i; 
             }
         }
+        // da migliorare, si può lavorare con un vettore di indici senza "generare" un nuovo vettore dentro il loop
         zCands = std::vector<double>(zCands.begin() + bestIdx, zCands.begin() + bestIdx + half);
     }
     
